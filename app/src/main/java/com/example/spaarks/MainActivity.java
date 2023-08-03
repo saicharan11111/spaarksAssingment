@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.example.spaarks.databinding.ActivityMainBinding;
@@ -12,7 +13,7 @@ import com.example.spaarks.databinding.DialogAddItemBinding;
 
 public class MainActivity extends AppCompatActivity {
     private MainViewModel viewModel;
-//    private MainAdapter adapter;
+    private MainAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-//        adapter = new MainAdapter(viewModel.getItems());
-//        binding.mainRecyclerView.setAdapter(adapter);
+        adapter = new MainAdapter(viewModel.getItems());
+        binding.mainRecyclerView.setAdapter(adapter);
     }
 
     private void showDialog() {
@@ -40,7 +41,12 @@ public class MainActivity extends AppCompatActivity {
         builder.setView(dialogBinding.getRoot());
 
         AlertDialog dialog = builder.create();
-
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+        dialog.dismiss();
+            }
+        });
         dialogBinding.setViewModel(viewModel);
         dialogBinding.setLifecycleOwner(this);
 

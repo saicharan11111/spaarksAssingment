@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableArrayList;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
@@ -14,7 +15,9 @@ import java.util.List;
     public class MainViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> showDialog = new MutableLiveData<>(false);
     private MutableLiveData<String> newTitle = new MutableLiveData<>();
-        private List<ItemViewModel> items = new ArrayList<>();
+        private final ObservableArrayList<ItemViewModel> items = new ObservableArrayList<>();
+
+
 
 
     public MainViewModel(@NonNull Application application) {
